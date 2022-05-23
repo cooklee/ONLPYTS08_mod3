@@ -1,0 +1,19 @@
+<table>
+    <tr>
+        <th></th>
+        {% for element in tab.0 %}
+            <th>{{ element }}</th>
+        {% endfor %}
+    </tr>
+
+    {% for line in tab %}
+
+        <tr>
+            <th>{{ line.0 }}</th>
+            {% for element in line %}
+                <td>{{ element }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+
+</table>
