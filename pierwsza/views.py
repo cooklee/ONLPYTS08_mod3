@@ -70,3 +70,17 @@ def all_persons(request):
 def person_detail(request, id):
     p = Person.objects.get(id=id)
     return render(request, 'p.html', {'person': p})
+
+
+def update_person(request, id):
+    p = Person.objects.get(id=id)
+    if request.method == 'GET':
+        return render(request, 'update_person.html', {'person':p})
+    imie = request.POST['first_name']
+    nazwisko = request.POST['last_name']
+    wiek = request.POST['age']
+    p.first_name = imie
+    p.last_name = nazwisko
+    p.age = wiek
+    p.save()
+    return render(request, 'update_person.html', {'person': p})

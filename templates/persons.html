@@ -1,5 +1,5 @@
 <ul>
 {% for person in persons %}
-    <li>{{ person.first_name }} {{ person.last_name }}</li>
+    <li><a href="/person_detail/{{ person.id }}">{{ person.first_name }} {{ person.last_name }}</a></li>
 {% endfor %}
 </ul>
