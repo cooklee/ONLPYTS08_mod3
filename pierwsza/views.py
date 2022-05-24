@@ -56,4 +56,8 @@ def add_person(request):
     return render(request, 'podsumowanie.html')
 
 
+def all_persons(request):
+    persons = Person.objects.all()
+    return render(request, 'persons.html', {'persons':persons})
+
 
