@@ -83,4 +83,4 @@ def update_person(request, id):
     p.last_name = nazwisko
     p.age = wiek
     p.save()
-    return render(request, 'update_person.html', {'person': p})
+    return render(request, 'update_person.html', {'person': p, 'message':'udało sie'})
