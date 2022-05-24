@@ -23,8 +23,9 @@ urlpatterns = [
     path('przywitanie/<str:imie>/', views.przywitanie),
     path('ala/', views.ala),
     path('losuj/<int:liczba>/', views.losuj),
-    path('dodaj/<int:l1>/<int:l2>/',views.dodaj),
+    path('dodaj/<int:l1>/<int:l2>/', views.dodaj),
     path('l_parametr/', views.losuj_parametr),
     path('get/', views.pokaz_parametry_get),
     path('tab/<int:a>/<int:b>/', views.tabliczka_mnozenia),
+    path('add_person/', views.add_person),
 ]

@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
 
+from pierwsza.models import Person
+
 
 def hello(request):
     return render(request, 'base.html')
@@ -42,7 +44,16 @@ def tabliczka_mnozenia(request, a, b):
     return render(request, 'tabliczka.html', {'tab':tab})
 
 
-
+def add_person(request):
+    if request.method == 'GET':
+        return render(request, 'form.html')
+    else:
+        imie = request.POST['first_name']
+        nazwisko = request.POST['last_name']
+        wiek = request.POST['age']
+        person = Person(first_name=imie, last_name=nazwisko, age=wiek)
+        person.save()
+    return render(request, 'podsumowanie.html')
 
 
 
