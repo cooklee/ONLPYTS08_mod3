@@ -28,6 +28,7 @@ urlpatterns = [
     path('get/', views.pokaz_parametry_get),
     path('tab/<int:a>/<int:b>/', views.tabliczka_mnozenia),
     path('add_person/', views.add_person),
+    path('add_book/', views.add_book),
     path('all_person/', views.all_persons),
     path('person_detail/<int:id>/', views.person_detail),
     path('update_person/<int:id>/', views.update_person)

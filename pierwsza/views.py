@@ -84,3 +84,10 @@ def update_person(request, id):
     p.age = wiek
     p.save()
     return render(request, 'update_person.html', {'person': p, 'message':'udało sie'})
+
+
+def add_book(request):
+    persons = Person.objects.all()
+    if request.method == "GET":
+        return render(request, 'add_book.html', {'persons':persons})
+    print(dict(request.POST))
