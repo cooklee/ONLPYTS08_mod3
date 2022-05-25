@@ -15,7 +15,13 @@ class Book(models.Model):
     title = models.CharField(max_length=50)
     year = models.IntegerField()
     author = models.ForeignKey(Person, on_delete=models.CASCADE, null=True)
-    genre = models.ForeignKey(Genre, on_delete=models.CASCADE, null=True)
+    # genre = models.ForeignKey(Genre, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.title
+
+    def __repr__(self):
+        return str(self)
 
 
 class Tire(models.Model):

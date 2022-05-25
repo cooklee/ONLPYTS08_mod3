@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils.datastructures import MultiValueDictKeyError
 
-from pierwsza.models import Person
+from pierwsza.models import Person, Book
 
 
 def hello(request):
@@ -90,4 +90,25 @@ def add_book(request):
     persons = Person.objects.all()
     if request.method == "GET":
         return render(request, 'add_book.html', {'persons':persons})
-    print(dict(request.POST))
+    title = request.POST['title']
+    year = request.POST['year']
+    author_id = request.POST['author']
+    p = Person.objects.get(id=author_id)
+    b = Book.objects.create(title=title, year=year, author=p)
+    return render(request, 'add_book.html', {'persons':persons, 'book':b})
+
+
+def update_book(request, id):
+    persons = Person.objects.all()
+    book = Book.objects.get(pk=id)
+    if request.method == "GET":
+        return render(request, 'update_book.html', {'persons': persons, 'book':book})
+    title = request.POST['title']
+    year = request.POST['year']
+    author_id = request.POST['author']
+    book.title = title
+    book.year = year
+    book.author = Person.objects.get(id=author_id)
+    book.save()
+    return render(request, 'update_book.html', {'persons': persons, 'book':book})
+

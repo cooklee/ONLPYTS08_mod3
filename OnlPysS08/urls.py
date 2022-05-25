@@ -31,5 +31,6 @@ urlpatterns = [
     path('add_book/', views.add_book),
     path('all_person/', views.all_persons),
     path('person_detail/<int:id>/', views.person_detail),
-    path('update_person/<int:id>/', views.update_person)
+    path('update_person/<int:id>/', views.update_person),
+    path('update_book/<int:id>/', views.update_book)
 ]
