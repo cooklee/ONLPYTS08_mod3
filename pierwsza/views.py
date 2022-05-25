@@ -69,6 +69,7 @@ def all_persons(request):
 
 def person_detail(request, id):
     p = Person.objects.get(id=id)
+    # books = Book.objects.filter(author=p) == p.book_set.all
     return render(request, 'p.html', {'person': p})
 
 
