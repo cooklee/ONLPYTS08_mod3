@@ -5,7 +5,9 @@ class Person(models.Model):
     first_name = models.CharField(max_length=100)  # w db first_name varchar(100)
     last_name = models.CharField(max_length=100)  # w db last_name varchar(100)
     age = models.IntegerField()  # w db age integer
-    #book_set
+    # book_set
+    # book_set
+
 
 class Genre(models.Model):
     name = models.CharField(max_length=50)
@@ -14,14 +16,17 @@ class Genre(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=50)
     year = models.IntegerField()
-    author = models.ForeignKey(Person, on_delete=models.CASCADE, null=True)
-    # genre = models.ForeignKey(Genre, on_delete=models.CASCADE, null=True)
+    author = models.ForeignKey(Person, on_delete=models.CASCADE, null=True, related_name='books_written')
+    #genre = models.ManyToManyField(Genre)
 
     def __str__(self):
         return self.title
 
     def __repr__(self):
         return str(self)
+
+    class Meta:
+        ordering = ['year', 'title']
 
 
 class Tire(models.Model):

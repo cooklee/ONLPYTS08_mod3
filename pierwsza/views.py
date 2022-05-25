@@ -63,8 +63,18 @@ def add_person(request):
 
 
 def all_persons(request):
-    persons = Person.objects.all()
+    last_name = request.GET.get('last_name', '')
+    persons = Person.objects.filter(last_name__icontains=last_name)
     return render(request, 'persons.html', {'persons': persons})
+
+
+def all_books(request):
+    title = request.GET.get('title', '')
+    year = request.GET.get('year', '')
+    books = Book.objects.filter(title__icontains=title)
+    if year != '':
+        books = books.filter(year=year)
+    return render(request, 'books.html', {'books': books})
 
 
 def person_detail(request, id):
@@ -76,7 +86,7 @@ def person_detail(request, id):
 def update_person(request, id):
     p = Person.objects.get(id=id)
     if request.method == 'GET':
-        return render(request, 'update_person.html', {'person':p})
+        return render(request, 'update_person.html', {'person': p})
     imie = request.POST['first_name']
     nazwisko = request.POST['last_name']
     wiek = request.POST['age']
@@ -84,32 +94,31 @@ def update_person(request, id):
     p.last_name = nazwisko
     p.age = wiek
     p.save()
-    return render(request, 'update_person.html', {'person': p, 'message':'udało sie'})
+    return render(request, 'update_person.html', {'person': p, 'message': 'udało sie'})
 
 
 def add_book(request):
     persons = Person.objects.all()
     if request.method == "GET":
-        return render(request, 'add_book.html', {'persons':persons})
+        return render(request, 'add_book.html', {'persons': persons})
     title = request.POST['title']
     year = request.POST['year']
     author_id = request.POST['author']
     p = Person.objects.get(id=author_id)
     b = Book.objects.create(title=title, year=year, author=p)
-    return render(request, 'add_book.html', {'persons':persons, 'book':b})
+    return render(request, 'add_book.html', {'persons': persons, 'book': b})
 
 
 def update_book(request, id):
     persons = Person.objects.all()
     book = Book.objects.get(pk=id)
     if request.method == "GET":
-        return render(request, 'update_book.html', {'persons': persons, 'book':book})
+        return render(request, 'update_book.html', {'persons': persons, 'book': book})
     title = request.POST['title']
     year = request.POST['year']
     author_id = request.POST['author']
-    book.title = title
+    book.title_omg = title
     book.year = year
     book.author = Person.objects.get(id=author_id)
     book.save()
-    return render(request, 'update_book.html', {'persons': persons, 'book':book})
-
+    return render(request, 'update_book.html', {'persons': persons, 'book': book})
