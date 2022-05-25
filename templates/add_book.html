@@ -10,5 +10,8 @@
             <option value="{{ p.id }}">{{ p.first_name }} {{ p.last_name }}</option>
         {% endfor %}
     </select>
+    {% for genre in genres %}
+        <p><input type="checkbox" name="genre" value="{{ genre.id }}"> {{ genre.name }}</p>
+    {% endfor %}
     <input type="submit">
 </form>
